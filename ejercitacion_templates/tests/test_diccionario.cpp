@@ -25,6 +25,25 @@ TEST(diccionario, dicc_int_int) {
 	ASSERT_EQ(d.obtener(1), 30);
 	ASSERT_EQ(d.obtener(2), 20);
 }
+
+TEST(diccionario, dicc_string_bool) {
+    Diccionario<std::string, bool> d;
+    ASSERT_FALSE(d.def("Luis"));
+    ASSERT_FALSE(d.def("Carlos"));
+    ASSERT_FALSE(d.def(" "));
+    d.definir("Luis", true);
+    ASSERT_TRUE(d.def("Luis"));
+    ASSERT_FALSE(d.def(" "));
+    ASSERT_FALSE(d.def("L"));
+    ASSERT_EQ(d.obtener("Luis"), true);
+    d.definir("Carlos", false);
+    ASSERT_TRUE(d.def("Luis"));
+    ASSERT_FALSE(d.def("c"));
+    ASSERT_EQ(d.obtener("Luis"), true);
+    ASSERT_EQ(d.obtener("Carlos"), false);
+}
+
+
 #endif
 
 #if EJ >= 6
